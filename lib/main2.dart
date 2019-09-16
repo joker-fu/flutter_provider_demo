@@ -102,14 +102,12 @@ class Page2 extends StatelessWidget {
           );
         }),
       ),
-      floatingActionButton: Consumer<CounterNotifier>(
-        builder: (context, counter, child) => FloatingActionButton(
-          onPressed: () {
-            counter.increment();
-          },
-          tooltip: 'Increment',
-          child: child,
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // 不需要监听改变（listen: false 不会重新调用build）
+          Provider.of<CounterNotifier>(context, listen: false).increment();
+        },
+        tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );

@@ -20,18 +20,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProvidePage extends StatelessWidget {
+class ProvidePage extends StatefulWidget {
   final String title;
 
   ProvidePage({Key key, this.title}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<ProvidePage> createState() => _ProvidePageState();
+}
+
+class _ProvidePageState extends State<ProvidePage> {
+  CounterNotifier _counter;
+
+  @override
+  void didChangeDependencies() {
+    print('didChangeDependencies');
     final counter = Provider.of<CounterNotifier>(context);
+    if (this._counter != counter) {
+      _counter = counter;
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     print('build');
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
@@ -42,7 +58,7 @@ class ProvidePage extends StatelessWidget {
               'You have pushed the button this many times:',
             ),
             Text(
-              '${counter.count}',
+              '${_counter.count}',
               style: Theme.of(context).textTheme.display1,
             ),
           ],
@@ -50,7 +66,7 @@ class ProvidePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          counter.increment();
+          _counter.increment();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
