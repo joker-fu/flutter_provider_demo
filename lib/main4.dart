@@ -43,6 +43,7 @@ class _ProvidePageState extends State<ProvidePage> {
             children: <Widget>[
               Selector<CounterNotifier, int>(
                 selector: (_, notifier) => notifier.count,
+//                shouldRebuild:(previous,next)=> false,
                 builder: (context, value, child) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
