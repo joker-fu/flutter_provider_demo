@@ -43,24 +43,26 @@ class _ProvidePageState extends State<ProvidePage> {
             children: <Widget>[
               Selector<CounterNotifier, int>(
                 selector: (_, notifier) => notifier.count,
-//                shouldRebuild:(previous,next)=> false,
+                shouldRebuild:(previous,next)=> false,
                 builder: (context, value, child) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Increment1 build ${_counter.count1}  count => You have pushed the button this many times:',
-                      ),
-                      Text(
-                        '${_counter.count}',
-                        style: Theme.of(context).textTheme.display1,
-                      ),
-                      FlatButton(
-                          onPressed: () {
-                            _counter.increment();
-                          },
-                          child: Text('Increment'))
-                    ],
+                  return Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Increment1 build ${_counter.count1}  count => You have pushed the button this many times:',
+                        ),
+                        Text(
+                          '${_counter.count}',
+                          style: Theme.of(context).textTheme.display1,
+                        ),
+                        FlatButton(
+                            onPressed: () {
+                              _counter.increment();
+                            },
+                            child: Text('Increment'))
+                      ],
+                    ),
                   );
                 },
               ),
